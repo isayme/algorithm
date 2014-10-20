@@ -3,13 +3,13 @@
 
 #include "kmp.h"
 
-int *KMP_pmt(unsigned char *wanted, int wlen)
+int *KMP_pmt(const unsigned char *wanted, int wlen)
 {
     int *pmt = NULL;
     int i;
     int k;
 
-    if (NULL == wanted) return NULL;
+    if (NULL == wanted || 0 >= wlen) return NULL;
 
     pmt = malloc(sizeof(int) * wlen);
     if (NULL == pmt) return NULL;
@@ -28,14 +28,14 @@ int *KMP_pmt(unsigned char *wanted, int wlen)
     return pmt;
 }
 
-unsigned char *KMP(unsigned char *s, int slen, unsigned char *wanted, int wlen)
+unsigned char *KMP(const unsigned char *s, int slen, const unsigned char *wanted, int wlen)
 {
     int *pmt = NULL;
     int i = 0;
     int j = 0;
     
-    if (NULL == s || NULL == wanted || slen < wlen) return NULL;
-    if (s == wanted) return s;
+    if (NULL == s || NULL == wanted || 0 >= wlen || slen < wlen) return NULL;
+    if (s == wanted) return (unsigned char *)s;
 
     pmt = KMP_pmt(wanted, wlen);
     if (NULL == pmt) return NULL;
@@ -55,5 +55,5 @@ unsigned char *KMP(unsigned char *s, int slen, unsigned char *wanted, int wlen)
 
     free(pmt);
 
-    return j == wlen ? s + i - wlen : NULL;
+    return j == wlen ? (unsigned char *)(s + i - wlen) : NULL;
 }
