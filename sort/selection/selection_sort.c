@@ -8,6 +8,8 @@ int selection_sort(int *arr, int n)
     int i, j;
     int small;
 
+    if (NULL == arr || n <= 0) return -1;
+
     for (i = 0; i < n - 1; i++) {
         small = i;
 
@@ -28,4 +30,6 @@ int selection_sort(int *arr, int n)
         printf("\n");
 #endif
     }
+
+    return 0;
 }

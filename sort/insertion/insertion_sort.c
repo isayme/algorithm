@@ -1,12 +1,12 @@
 #include <stdio.h>
 #include "insertion_sort.h"
 
-#define swap(x, y)  do{x=x^y;y=x^y;x=x^y;}while(0)
-
 int insertion_sort(int *arr, int n)
 {
     int i, j;
     int cur;
+
+    if (NULL == arr || n <= 0) return -1;
 
     for (i = 1; i < n; i++) {
         cur = arr[i];
@@ -25,4 +25,6 @@ int insertion_sort(int *arr, int n)
         printf("\n");
 #endif
     }
+
+    return 0;
 }
